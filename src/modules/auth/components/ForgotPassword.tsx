@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import logo from '../../../images/logo.png' 
 
 interface formData {
   email: string;
@@ -24,6 +25,7 @@ function ForgotPassword() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center">
       <div className="max-w-md w-full mx-auto m-5 p-10">
+      <img className='w-20 m-auto'src={logo}></img>
         <div className="text-3xl font-bold text-gray-900 mt-2 mb-2 text-center">
         Forgot Password ?
         </div>
@@ -49,12 +51,12 @@ function ForgotPassword() {
             <div className="invalid-feedback">{errors.email?.message}</div>
           </div>
           <div className="flex ">
-            <button className="w-full py-2 px-4 bg-violet-600 hover:bg-violet-700 rounded text-sm text-white mb-3 ">
+            <button className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 rounded text-sm text-white mb-3 ">
               Reset
             </button>
 
             <Link to="/auth/Login">
-              <button className="w-full py-2 px-4 bg-gray-100 text-sm text-violet-600 hover:bg-violet-600 rounded hover:text-white mb-3 ml-2   ">
+              <button className="w-full py-2 px-4 bg-gray-100 text-sm text-blue-500 hover:bg-blue-700 rounded hover:text-white mb-3 ml-2   ">
                 Cancel
               </button>
             </Link>

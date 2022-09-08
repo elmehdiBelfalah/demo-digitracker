@@ -1,25 +1,23 @@
 import "./App.css";
-import Login from "./modules/auth/components/Login";
-import Registration from "./modules/auth/components/Registration";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import ForgotPassword from "./modules/auth/components/ForgotPassword";
-import SideBar from "./layout/SideBar";
-import Header from "./layout/Header";
+import Layout from "./layout/Layout";
 import AuthPage from "./modules/auth/AuthPage";
+import ProfileDetails from "./modules/profile/ProfileDetails";
 
 function App() {
   return (
     <Router>
-      <SideBar/>
-      {/* <Routes>
-        <Route path="/*" element={<AuthPage />} />
-        <Route path="*" element={<Navigate to="/auth" />} />
-      </Routes> */}
+      {/* <ProfileDetails/> */}
+      {/* <Layout/> */}
+        <Routes>
+          <Route path="/*" element={<AuthPage />} />
+          <Route path="*" element={<Navigate to="/auth" />} />
+        </Routes>
     </Router>
   );
 }

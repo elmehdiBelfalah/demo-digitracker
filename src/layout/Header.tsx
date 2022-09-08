@@ -1,33 +1,83 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { useState,ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { notif_icon, search_icon } from "../images/utils/Svg";
 import NavigationLinks from "./Components/NavigationLinks";
-import user from '../images/account.png'
+import { Message, Notifications, Person, SearchOutlined } from "@mui/icons-material";
+import DropDownMenu from "./Components/DropDownMenu";
+import DropDownSearch from "./Components/DropDownSearch";
+import DropDownList from "./Components/DropDownList";
 
-function Header() {
+type prop = {
+children? : ReactNode ;
+}
+
+function Header( props : prop) {
   const navlinks = [
-    { title: "Dashboard" },
-    { title: "Account" },
-    { title: "Search" },
-    { title: "Settings" },
+    { title: "Dashboard" ,key : "Dashboard"},
+    { title: "Account" ,key : "Account" },
+    { title: "Search" ,key : "Search"},
+    { title: "Settings" ,key : "Settings"},
+   
   ];
+  const [open,setOpen]=useState('Dashboard');
+  const [menuDown,setMenuDown]=useState(false)
+
+  console.log(menuDown)
 
   return (
-    <div className="border-b border-purple-900  items-center justify-between flex w-full space-x-4 pb-3 pt-3 px-3">
+    
+    <div className=" bg-slate-50 border-b border-blue-500  items-center justify-between flex w-full space-x-4 pb-[0.5px] pt-[1px] px-2">
         <div className=" w-[140%] items-center justify-center flex space-x-2">
             {navlinks.map((link)=>(
                     
-                    <div className="relative items-center justify-center flex">
-                        <NavigationLinks title={link.title} key={link.title} />
+                    <div onClick={()=>setOpen(link.title)}
+                      className={`${open === link.title}relative items-center justify-center flex`}>
+                        <div className={`${link.title===open ? 'text-white  bg-blue-500 rounded':'text-blue-500 bg-slate-50'} `}>
+                        <NavigationLinks title={link.title} key={link.key} />
+                        </div>
                     </div>
                 
                 ))}   
         </div>
-      <div className="pb-5 pt-4 hidden md:flex  items-center justify-center px-3 space-x-6 w-[60%] ">
-        <div >{search_icon}</div>
-        <div className=" pl-10 pr-10">{notif_icon}</div>
-        <img src={user} alt="logo-user" className="w-7 h-7 rounded-full object-center object-cover" />
-      </div>
+        <ul className="pb-4 pt-4 hidden md:flex  items-center justify-center px-1 space-x-6 w-[60%]">
+          <li>
+            <DropDownSearch
+            value={ <SearchOutlined className='text-withe '/>}
+             />
+          </li>
+          <li >
+          <DropDownMenu
+           value={<Notifications className=" text-white"/>} 
+           child1='Profile' 
+           child2="My projects"
+           child3="My statements"
+           child4="Account settings"
+           child5="Logout"/>
+            </li>
+          <li >
+          <DropDownMenu
+           value={<Message className=" text-white"/>} 
+           child1='Profile' 
+           child2="My projects"
+           child3="My statements"
+           child4="Account settings"
+           child5="Logout"/>
+            </li>
+          <li><DropDownMenu
+           value={<Person className='  text-white' />} 
+           child1='Profile' 
+           child2="My projects"
+           child3="My statements"
+           child4="Account settings"
+           child5="Logout"/>
+           </li>
+        </ul>
+      {/* <div className="pb-5 pt-4 hidden md:flex  items-center justify-center px-3 space-x-6 w-[60%] ">
+        <div ><SearchOutlined className='text-purple-900'/></div>
+        <div className=" px-5 text-purple-900"><Notifications/></div>
+        <div className=" px-5 text-purple-900"><Message/></div>
+        <div><Person className='text-purple-900' ></Person></div>
+      </div> */}
     </div>
   );
 }

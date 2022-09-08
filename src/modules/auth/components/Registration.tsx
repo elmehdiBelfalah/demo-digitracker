@@ -3,7 +3,8 @@ import * as yup from 'yup' ;
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useForm} from 'react-hook-form';
 import {Link , NavLink} from 'react-router-dom'
-import Login from './Login';
+import logo from '../../../images/logo.png'
+import * as digimperialAuth from  "@digimperial/js-auth-sdk";
 
 interface formData {
     first_name : string,
@@ -18,7 +19,7 @@ function Registration() {
   
     const Validation =yup.object().shape({
         first_name :yup.string().required('First name is required'),
-        Last_name :yup.string().required('Last name is required'),
+        last_name :yup.string().required('Last name is required'),
         email : yup.string().required('Email is required').email('email is invalid'),
         password : yup.string().required('Password is required'),
         Cpassword : yup.string().required('The confirmation password is required')
@@ -33,13 +34,14 @@ function Registration() {
         })
       return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center">
-          <div className="max-w-md w-full mx-auto m-10 p-10">
+          <div className="max-w-md w-full mx-auto m-10 p-8">
+          <img className='w-20 m-auto'src={logo}></img>
             <div className="text-3xl font-bold text-gray-900 mt-2 text-center">
               Create an Account
             </div>
             <div className="text-center font-medium text-xl text-gray-600">
              <Link to='/auth/Login' >Already have an anccount ?  </Link>
-             <Link to="/auth/ForgotPassword" className=" text-violet-600 ml-3 " >
+             <Link to="/auth/ForgotPassword" className=" text-blue-500 ml-3 " >
                 Forgot Password?
               </Link>
             </div>
@@ -65,10 +67,10 @@ function Registration() {
                 <input
                   type="text"
                   className={"w-full p-2 border border-gray-300 rounded mt-1"+`form-control ${errors.last_name ? 'is-invalid' : ''}`}
-                  {...register('last_name')} 
+                  {...register("last_name")} 
                   placeholder="Last name"
                 />
-                <div className={"text-red-500 "+`invalid-feedback"`}>{errors.last_name ?.message}</div>
+                <div className={"text-red-500 "+`invalid-feedback"`}>{errors.last_name?.message} </div>
               </div>
               <div>
                 <label htmlFor="" className="text-sm font-bold text-gray-600 block">
@@ -120,12 +122,12 @@ function Registration() {
             <div className={"text-red-500 "+`invalid-feedback"`}>{errors.acceptTerms ?.message}</div>
             </div>
               <div >
-                <button className="w-full py-2 px-4 bg-violet-600 hover:bg-violet-700 rounded text-sm text-white mb-3 ">
+                <button className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded text-sm text-white mb-3 ">
                   Create
                 </button>
                
                <NavLink to='/auth/Login'>
-               <button className="w-full py-2 px-4 bg-gray-100 text-sm text-violet-600 hover:bg-violet-600 rounded hover:text-white  ">
+               <button className="w-full py-2 px-4 bg-gray-100 text-sm text-blue-500 hover:bg-blue-600 rounded hover:text-white  ">
                   Cancel
                 </button>
                </NavLink>
